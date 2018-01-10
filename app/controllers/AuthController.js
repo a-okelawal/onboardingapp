@@ -1,5 +1,6 @@
 import bcrypt, { genSalt } from 'bcrypt';
 import User from '../models/User';
+import { reject } from 'bcrypt/lib/promises';
 
 export default class AuthController {
   /**
@@ -46,5 +47,35 @@ export default class AuthController {
         });
       }
     });
+  }
+
+  static saveUser(data) {
+    return new Promise((resolve, reject) => {
+      User.findOne({ username: data.username }, (err, user) => {
+        if (err) {
+          reject({ code: 500, error: err});
+        } else if (user) {
+          reject({ code: 409, error: 'User already exists.'});
+        } else {
+          hashPassword(data.password)
+          user = new User({
+            username: data.username,
+            password: hash,
+            role: body.role
+          });
+
+
+        }
+      });
+    });
+  }
+
+  /**
+   * Function to hash password
+   * @param {*} password 
+   */
+  static hashPassword(password) {
+    const salt = bcrypt.genSaltSync(10);
+    return bcrypt.hashSync(password, salt);
   }
 }
