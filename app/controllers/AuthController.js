@@ -11,7 +11,7 @@ export default class AuthController {
     const body = req.body;
 
     User.findOne({
-      username: body.username
+      email: body.email
     }, (err, user) => {
       if (err) {
         res.status(500).send(err);
@@ -28,7 +28,7 @@ export default class AuthController {
                 res.status(500).send(err);
               }
               user = new User({
-                username: body.username,
+                email: body.email,
                 password: hash,
                 role: body.role
               });
@@ -38,7 +38,7 @@ export default class AuthController {
                   res.status(500).send(err);
                 } else {
                   //TODO: Also save employee details is employee
-                  res.status(201).send({ message: `User ${user.username} has been created successfully.` });
+                  res.status(201).send({ message: `User ${user.email} has been created successfully.` });
                 }
               });
             });
