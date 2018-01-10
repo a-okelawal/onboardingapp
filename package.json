@@ -1,0 +1,36 @@
+{
+  "name": "onboardingapp",
+  "version": "1.0.0",
+  "description": "Onboarding employees and creating of tasks",
+  "main": "server.js",
+  "scripts": {
+    "test": "",
+    "start": "nodemon server.js --exec babel-node --presets es2015,stage-2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/andela-abisoye/onboardingapp.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/andela-abisoye/onboardingapp/issues"
+  },
+  "homepage": "https://github.com/andela-abisoye/onboardingapp#readme",
+  "dependencies": {
+    "mongoose": "latest",
+    "express": "latest",
+    "body-parser": "latest",
+    "should": "latest",
+    "supertest": "latest",
+    "dotenv": "latest",
+    "mocha": "latest"
+  },
+  "devDependencies": {
+    "nodemon": "latest",
+    "babel-cli": "latest",
+    "babel-preset-es2015": "latest",
+    "babel-preset-stage-2": "latest",
+    "babel-register": "latest"
+  }
+}
