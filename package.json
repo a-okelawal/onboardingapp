@@ -18,13 +18,14 @@
   },
   "homepage": "https://github.com/andela-abisoye/onboardingapp#readme",
   "dependencies": {
-    "mongoose": "latest",
-    "express": "latest",
+    "bcrypt": "^1.0.3",
     "body-parser": "latest",
-    "should": "latest",
-    "supertest": "latest",
     "dotenv": "latest",
-    "mocha": "latest"
+    "express": "latest",
+    "mocha": "latest",
+    "mongoose": "latest",
+    "should": "latest",
+    "supertest": "latest"
   },
   "devDependencies": {
     "nodemon": "latest",
