@@ -1,13 +1,13 @@
 import bcrypt, { genSalt } from 'bcrypt';
 import User from '../models/User';
 
-export default class UserController {
+export default class AuthController {
   /**
    * Logic for creating a user
    * @param {*} req 
    * @param {*} res 
    */
-  static create(req, res) {
+  static signup(req, res) {
     const body = req.body;
 
     User.findOne({

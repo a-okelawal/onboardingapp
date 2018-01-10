@@ -1,11 +1,11 @@
-export default class UserValidator {
+export default class AuthValidator {
   /**
    * Validate creation request
    * @param {*} req 
    * @param {*} res 
    * @param {*} next 
    */
-  static createValidator(req, res, next) {
+  static signupValidator(req, res, next) {
     const body = req.body;
 
     if (!body.username || body.username.length < 5) {
