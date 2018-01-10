@@ -29,7 +29,8 @@ export default class AuthController {
               }
               user = new User({
                 username: body.username,
-                password: hash
+                password: hash,
+                role: body.role
               });
 
               user.save((err) => {
