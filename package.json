@@ -4,7 +4,7 @@
   "description": "Onboarding employees and creating of tasks",
   "main": "server.js",
   "scripts": {
-    "test": "",
+    "test": "NODE_ENV=test ./node_modules/.bin/mocha $(find tests '*.test.js') --compilers js:babel-register --exit",
     "start": "nodemon server.js --exec babel-node --presets es2015,stage-2"
   },
   "repository": {
@@ -18,13 +18,14 @@
   },
   "homepage": "https://github.com/andela-abisoye/onboardingapp#readme",
   "dependencies": {
-    "mongoose": "latest",
-    "express": "latest",
+    "bcrypt": "^1.0.3",
     "body-parser": "latest",
-    "should": "latest",
-    "supertest": "latest",
     "dotenv": "latest",
-    "mocha": "latest"
+    "express": "latest",
+    "mocha": "latest",
+    "mongoose": "latest",
+    "should": "latest",
+    "supertest": "latest"
   },
   "devDependencies": {
     "nodemon": "latest",
