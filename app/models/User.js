@@ -3,7 +3,8 @@ import mongoose from 'mongoose';
 const userSchema = new mongoose.Schema({
   name: {
     type: String,
-    required: true
+    required: true,
+    lowercase: true
   },
   email: {
     type: String,
@@ -20,8 +21,9 @@ const userSchema = new mongoose.Schema({
     maxlength: 11
   },
   department: {
-    type: String,
-    required: true
+    type: String
+    //TODO: Add the code below once the Department model has been created
+    // ref: 'Department'
   },
   dOE: {
     type: Date,
