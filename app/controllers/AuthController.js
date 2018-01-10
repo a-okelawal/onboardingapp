@@ -1,6 +1,5 @@
-import bcrypt, { genSalt } from 'bcrypt';
+import bcrypt from 'bcrypt';
 import User from '../models/User';
-import { reject } from 'bcrypt/lib/promises';
 
 export default class AuthController {
   /**
@@ -11,60 +10,56 @@ export default class AuthController {
   static signup(req, res) {
     const body = req.body;
 
-    User.findOne({
-      username: body.username
-    }, (err, user) => {
-      if (err) {
-        res.status(500).send(err);
-      } else if (user) {
-        res.status(409).send({ message: 'User already exists.' });
-      } else {
-        const salt = 10;
-        bcrypt.genSalt(salt, (err, genSalt) => {
-          if (err) {
-            res.status(500).send(err);
-          } else {
-            bcrypt.hash(body.password, (err, hash) => {
-              if (err) {
-                res.status(500).send(err);
-              }
-              user = new User({
-                username: body.username,
-                password: hash,
-                role: body.role
-              });
+    let user = new User({
+      name: body.name,
+      email: body.email,
+      password: AuthController.hashPassword(body.password),
+      phone: body.phone,
+      role: body.role
+    });
 
-              user.save((err) => {
-                if (err) {
-                  res.status(500).send(err);
-                } else {
-                  //TODO: Also save employee details is employee
-                  res.status(201).send({ message: `User ${user.username} has been created successfully.` });
-                }
-              });
-            });
-          }
-        });
-      }
+    AuthController.createUser(user).then((result) => {
+      res.status(201).send({ message: `${result.name} was created successfully as a/an ${result.role}.` });
+    }).catch((err) => {
+      res.status(err.code).send({ error: err.error});
     });
   }
 
-  static saveUser(data) {
+  /**
+   * Save User
+   * @param {*} user 
+   */
+  static createUser(user) {
     return new Promise((resolve, reject) => {
-      User.findOne({ username: data.username }, (err, user) => {
+      AuthController.findUser(user).then((result) => {
+        if (result) {
+          reject({ code: 409, error: 'User with email already exists.' });
+        } else {
+          user.save((err) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(user);
+            }
+          });
+        }
+      }).catch((err) => {
+        reject(err);
+      });
+    });
+  }
+
+  /**
+   * Find User
+   * @param {*} data 
+   */
+  static findUser(data) {
+    return new Promise((resolve, reject) => {
+      User.findOne({ email: data.email }, (err, user) => {
         if (err) {
           reject({ code: 500, error: err});
-        } else if (user) {
-          reject({ code: 409, error: 'User already exists.'});
         } else {
-          hashPassword(data.password)
-          user = new User({
-            username: data.username,
-            password: hash,
-            role: body.role
-          });
-
-
+          resolve(user);
         }
       });
     });
