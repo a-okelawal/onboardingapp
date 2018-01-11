@@ -41,8 +41,7 @@ export default class AuthenticationCtrl {
       name: body.name,
       email: body.email,
       password: AuthenticationCtrl.hashPassword(body.password),
-      phone: body.phone,
-      role: body.role
+      phone: body.phone
     });
 
     AuthenticationCtrl.createUser(user).then((result) => {

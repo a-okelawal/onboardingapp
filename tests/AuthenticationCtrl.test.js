@@ -17,12 +17,11 @@ describe('Authentication', () => {
             password: 'password',
             phone: '08011110000',
             department: '4oi4oi3o9409',
-            dOE: '01/01/2018',
-            role: 'admin',
+            dOE: '01/01/2018'
           })
           .end((err, res) => {
             res.status.should.equal(201);
-            res.body.message.should.equal('test user was created successfully as a/an admin.');
+            res.body.message.should.equal('test user was created successfully as a/an employee.');
             done();
           });
       });
@@ -38,8 +37,7 @@ describe('Authentication', () => {
             password: 'password',
             phone: '08011110000',
             department: '4oi4oi3o9409',
-            dOE: '01/01/2018',
-            role: 'admin',
+            dOE: '01/01/2018'
           })
           .end((err, res) => {
             res.status.should.equal(400);
@@ -57,8 +55,7 @@ describe('Authentication', () => {
             password: 'password',
             phone: '08011110000',
             department: '4oi4oi3o9409',
-            dOE: '01/01/2018',
-            role: 'admin',
+            dOE: '01/01/2018'
           })
           .end((err, res) => {
             res.status.should.equal(400);
@@ -76,8 +73,7 @@ describe('Authentication', () => {
             password: 'pas',
             phone: '08011110000',
             department: '4oi4oi3o9409',
-            dOE: '01/01/2018',
-            role: 'admin',
+            dOE: '01/01/2018'
           })
           .end((err, res) => {
             res.status.should.equal(400);
@@ -94,8 +90,7 @@ describe('Authentication', () => {
             email: 'test@email.com',
             password: 'password',
             phone: '08011110000',
-            dOE: '01/01/2018',
-            role: 'admin',
+            dOE: '01/01/2018'
           })
           .end((err, res) => {
             res.status.should.equal(400);
@@ -113,8 +108,7 @@ describe('Authentication', () => {
             password: 'password',
             phone: '080111100',
             department: '4oi4oi3o9409',
-            dOE: '01/01/2018',
-            role: 'admin',
+            dOE: '01/01/2018'
           })
           .end((err, res) => {
             res.status.should.equal(400);
@@ -132,8 +126,7 @@ describe('Authentication', () => {
             password: 'password',
             phone: '08011110000',
             department: '4oi4oi3o9409',
-            dOE: '01/01/2018',
-            role: 'admin',
+            dOE: '01/01/2018'
           })
           .end((err, res) => {
             res.status.should.equal(409);
