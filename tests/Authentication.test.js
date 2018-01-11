@@ -5,24 +5,40 @@ import server from '../server';
 
 const request = supertest(server);
 
+let etoken, stoken;
+
 describe('Authentication', () => {
+  before((done) => {
+    request
+      .post('/api/v1/auth/login')
+      .send({
+        email: process.env.SUPEREMAIL,
+        password: process.env.SUPERPASSWORD
+      })
+      .end((err, res) => {
+        stoken = res.body.jwt;
+        done();
+      });
+  });
+
   describe('signup', () => {
-    describe('allows', () => {
+
+    describe('allows', () => {      
       it('signup with all valid requirements', (done) => {
         request
           .post('/api/v1/auth/signup')
+          .set('x-access-token', stoken)
           .send({
-            name: 'Test User',
+            name: 'test user',
             email: 'test@email.com',
             password: 'password',
             phone: '08011110000',
             department: '4oi4oi3o9409',
-            dOE: '01/01/2018',
-            role: 'admin',
+            dOE: '01/01/2018'
           })
           .end((err, res) => {
             res.status.should.equal(201);
-            res.body.message.should.equal('test user was created successfully as a/an admin.');
+            res.body.message.should.equal('test user was created successfully as a/an employee.');
             done();
           });
       });
@@ -38,12 +54,11 @@ describe('Authentication', () => {
             password: 'password',
             phone: '08011110000',
             department: '4oi4oi3o9409',
-            dOE: '01/01/2018',
-            role: 'admin',
+            dOE: '01/01/2018'
           })
           .end((err, res) => {
             res.status.should.equal(400);
-            res.body.message.should.equal('Name must have atleast first and last name.');
+            res.body.error.should.equal('Name must have atleast first and last name.');
             done();
           });
       });
@@ -57,12 +72,11 @@ describe('Authentication', () => {
             password: 'password',
             phone: '08011110000',
             department: '4oi4oi3o9409',
-            dOE: '01/01/2018',
-            role: 'admin',
+            dOE: '01/01/2018'
           })
           .end((err, res) => {
             res.status.should.equal(400);
-            res.body.message.should.equal('Email is invalid.');
+            res.body.error.should.equal('Email is invalid.');
             done();
           });
       });
@@ -76,12 +90,11 @@ describe('Authentication', () => {
             password: 'pas',
             phone: '08011110000',
             department: '4oi4oi3o9409',
-            dOE: '01/01/2018',
-            role: 'admin',
+            dOE: '01/01/2018'
           })
           .end((err, res) => {
             res.status.should.equal(400);
-            res.body.message.should.equal('Password is invalid. Must be at least 6 characters.');
+            res.body.error.should.equal('Password is invalid. Must be at least 6 characters.');
             done();
           });
       });
@@ -94,12 +107,11 @@ describe('Authentication', () => {
             email: 'test@email.com',
             password: 'password',
             phone: '08011110000',
-            dOE: '01/01/2018',
-            role: 'admin',
+            dOE: '01/01/2018'
           })
           .end((err, res) => {
             res.status.should.equal(400);
-            res.body.message.should.equal('Employee must belong to a department.');
+            res.body.error.should.equal('Employee must belong to a department.');
             done();
           });
       });
@@ -113,12 +125,11 @@ describe('Authentication', () => {
             password: 'password',
             phone: '080111100',
             department: '4oi4oi3o9409',
-            dOE: '01/01/2018',
-            role: 'admin',
+            dOE: '01/01/2018'
           })
           .end((err, res) => {
             res.status.should.equal(400);
-            res.body.message.should.equal('Phone number is invalid.');
+            res.body.error.should.equal('Phone number is invalid.');
             done();
           });
       });
@@ -126,14 +137,14 @@ describe('Authentication', () => {
       it('signup of duplicate user', (done) => {
         request
           .post('/api/v1/auth/signup')
+          .set('x-access-token', stoken)
           .send({
-            name: 'Test User',
+            name: 'test user',
             email: 'test@email.com',
             password: 'password',
             phone: '08011110000',
             department: '4oi4oi3o9409',
-            dOE: '01/01/2018',
-            role: 'admin',
+            dOE: '01/01/2018'
           })
           .end((err, res) => {
             res.status.should.equal(409);
@@ -150,11 +161,12 @@ describe('Authentication', () => {
         request
           .post('/api/v1/auth/login')
           .send({
+            email: 'tif@ni.com',
             password: 'tola'
           })
           .end((err, res) => {
             res.status.should.equal(404);
-            res.body.message.should.equal('User with email does not exist.');
+            res.body.error.should.equal('User with email does not exist.');
             done();
           });
       });
@@ -168,7 +180,7 @@ describe('Authentication', () => {
           })
           .end((err, res) => {
             res.status.should.equal(401);
-            res.body.message.should.equal('Invalid password.');
+            res.body.error.should.equal('Invalid password.');
             done();
           });
       });
@@ -185,9 +197,31 @@ describe('Authentication', () => {
           .end((err, res) => {
             res.status.should.equal(200);
             res.body.should.have.property('jwt');
+            etoken = res.body.token;
             done();
           });
       });
+    });
+  });
+
+  describe('authenticate', () => {
+    it('should reject invalid tokens', (done) => {
+      request
+        .post('/api/v1/auth/signup')
+        .set('x-access-token', 'doidohiiod')
+        .send({
+          name: 'test user',
+          email: 'test@email.com',
+          password: 'password',
+          phone: '08011110000',
+          department: '4oi4oi3o9409',
+          dOE: '01/01/2018'
+        })
+        .end((err, res) => {
+          res.status.should.equal(401);
+          res.body.error.should.equal('Invalid token.');
+          done();
+        });
     });
   });
 });

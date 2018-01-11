@@ -1,5 +1,6 @@
-import AuthController from '../controllers/AuthController';
-import AuthValidator from '../middleware/AuthValidator';
+import AuthenticationCtrl from '../controllers/AuthenticationCtrl';
+import Authentication from '../middleware/Authentication';
+import Authorization from '../middleware/Authorization';
 
 export default class AuthRoutes {
   /**
@@ -9,13 +10,15 @@ export default class AuthRoutes {
   static routes(router) {
     router.route('/auth/signup')
       .post(
-        AuthValidator.signupValidator,
-        AuthController.signup
+        Authentication.signupValidator,
+        Authentication.authenticate,
+        Authorization.isAdmin,
+        AuthenticationCtrl.signup
       );
 
     router.route('/auth/login')
       .post(
-        AuthController.login
+        AuthenticationCtrl.login
       );
   }
 };
