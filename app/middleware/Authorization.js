@@ -21,11 +21,37 @@ export default class Authorization {
     });
   }
 
+  /**
+   * Authorization check for admins
+   * @param {*} req 
+   * @param {*} res 
+   * @param {*} next 
+   */
   static isAdmin(req, res, next) {
     const token = req.body.token || req.query.token || req.headers['x-access-token'];
 
     Authorization.decode(token).then((user) => {
       if (user.role !== 'super' && user.role !== 'admin') {
+        res.status(401).send('Unauthorized.')
+      } else {
+        next();
+      }
+    }).catch((err) => {
+      res.status(err.code).send(err.error);
+    });
+  }
+
+  /**
+   * Authorization for Employees
+   * @param {*} req 
+   * @param {*} res 
+   * @param {*} next 
+   */
+  static isEmployee(req, res, next) {
+    const token = req.body.token || req.query.token || req.headers['x-access-token'];
+
+    Authorization.decode(token).then((user) => {
+      if (user.role !== 'super' && user.role !== 'admin' && user.role !== 'employee') {
         res.status(401).send('Unauthorized.')
       } else {
         next();
