@@ -1,7 +1,34 @@
 import bcrypt from 'bcrypt';
+import jwt from 'jsonwebtoken';
+
+import config from '../../config/Config';
 import User from '../models/User';
 
 export default class AuthController {
+  /**
+   * Logic for login
+   * @param {*} req 
+   * @param {*} res 
+   */
+  static login(req, res) {
+    const body = req.body;
+
+    AuthController.findUser(body).then((user) => {
+      if (!user) {
+        res.status(404).send({ message: 'User with email does not exist.' });
+      } else {
+        if (AuthController.comparePasswords(body.password, user.password)) {
+          const jwt = AuthController.generateToken(user);
+          res.status(200).send({user, jwt});
+        } else {
+          res.status(401).send({ message: 'Invalid password.' });
+        }
+      }
+    }).catch((err) => {
+      res.status(err.code).send({ error: err.error});
+    });
+  }
+
   /**
    * Logic for creating a user
    * @param {*} req 
@@ -37,7 +64,7 @@ export default class AuthController {
         } else {
           user.save((err) => {
             if (err) {
-              reject(err);
+              reject({ code: 500, error: err });
             } else {
               resolve(user);
             }
@@ -72,5 +99,22 @@ export default class AuthController {
   static hashPassword(password) {
     const salt = bcrypt.genSaltSync(10);
     return bcrypt.hashSync(password, salt);
+  }
+
+  /**
+   * Compare Passwords
+   * @param {*} password 
+   * @param {*} hash 
+   */
+  static comparePasswords(password, hash) {
+    return bcrypt.compareSync(password, hash);
+  }
+
+  /**
+   * Generate signed token
+   * @param {*} user 
+   */
+  static generateToken(user) {
+    return jwt.sign({ id: user._id, name: user.name, role: user.role }, config.secret);
   }
 }
