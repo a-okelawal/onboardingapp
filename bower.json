@@ -1,0 +1,16 @@
+{
+  "name": "onboardingapp",
+  "description": "Onboarding employees and creating of tasks",
+  "main": "server.js",
+  "authors": [
+    "Saint-lawal <abiso.lawal@gmail.com>"
+  ],
+  "license": "ISC",
+  "homepage": "https://github.com/andela-abisoye/onboardingapp",
+  "dependencies": {
+    "angular": "latest",
+    "angular-route": "latest",
+    "bootstrap": "latest",
+    "font-awesome": "latest"
+  }
+}
