@@ -4,7 +4,7 @@ import jwt from 'jsonwebtoken';
 import config from '../../config/Config';
 import User from '../models/User';
 
-export default class Authentication {
+export default class AuthenticationCtrl {
   /**
    * Logic for login
    * @param {*} req 
@@ -13,12 +13,12 @@ export default class Authentication {
   static login(req, res) {
     const body = req.body;
 
-    Authentication.findUser(body).then((user) => {
+    AuthenticationCtrl.findUser(body).then((user) => {
       if (!user) {
         res.status(404).send({ message: 'User with email does not exist.' });
       } else {
-        if (Authentication.comparePasswords(body.password, user.password)) {
-          const jwt = Authentication.generateToken(user);
+        if (AuthenticationCtrl.comparePasswords(body.password, user.password)) {
+          const jwt = AuthenticationCtrl.generateToken(user);
           res.status(200).send({user, jwt});
         } else {
           res.status(401).send({ message: 'Invalid password.' });
@@ -40,12 +40,12 @@ export default class Authentication {
     let user = new User({
       name: body.name,
       email: body.email,
-      password: Authentication.hashPassword(body.password),
+      password: AuthenticationCtrl.hashPassword(body.password),
       phone: body.phone,
       role: body.role
     });
 
-    Authentication.createUser(user).then((result) => {
+    AuthenticationCtrl.createUser(user).then((result) => {
       res.status(201).send({ message: `${result.name} was created successfully as a/an ${result.role}.` });
     }).catch((err) => {
       res.status(err.code).send({ error: err.error});
@@ -58,7 +58,7 @@ export default class Authentication {
    */
   static createUser(user) {
     return new Promise((resolve, reject) => {
-      Authentication.findUser(user).then((result) => {
+      AuthenticationCtrl.findUser(user).then((result) => {
         if (result) {
           reject({ code: 409, error: 'User with email already exists.' });
         } else {

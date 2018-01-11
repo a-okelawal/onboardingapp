@@ -1,6 +1,6 @@
 import Util from '../shared/Util';
 
-export default class AuthValidator {
+export default class Authentication {
   /**
    * Validate user signup request
    * @param {*} req 
