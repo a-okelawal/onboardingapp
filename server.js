@@ -3,15 +3,14 @@ import express from 'express';
 import mongoose from 'mongoose';
 
 import Routes from './app/routes/routes';
-import config from './config/Config';
+import config from './config/config';
 
 const app = express();
 const router = express.Router();
+const port = config.port
 
 // Connect to db once config is set
 mongoose.connect(config.db);
-
-const port = config.port
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));

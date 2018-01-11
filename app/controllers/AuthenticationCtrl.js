@@ -1,7 +1,7 @@
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 
-import config from '../../config/Config';
+import config from '../../config/config';
 import User from '../models/User';
 
 export default class AuthenticationCtrl {
