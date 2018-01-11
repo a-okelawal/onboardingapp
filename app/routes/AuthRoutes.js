@@ -1,4 +1,4 @@
-import AuthController from '../controllers/AuthController';
+import Authentication from '../controllers/Authentication';
 import AuthValidator from '../middleware/AuthValidator';
 
 export default class AuthRoutes {
@@ -10,12 +10,12 @@ export default class AuthRoutes {
     router.route('/auth/signup')
       .post(
         AuthValidator.signupValidator,
-        AuthController.signup
+        Authentication.signup
       );
 
     router.route('/auth/login')
       .post(
-        AuthController.login
+        Authentication.login
       );
   }
 };
