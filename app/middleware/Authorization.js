@@ -8,17 +8,13 @@ export default class Authorization {
    * @param {*} next 
    */
   static isSuperAdmin(req, res, next) {
-    const token = req.body.token || req.query.token || req.headers['x-access-token'];
+    const user = req.user;
 
-    Authorization.decode(token).then((user) => {
-      if (user.role !== 'super') {
-        res.status(401).send('Unauthorized.')
-      } else {
-        next();
-      }
-    }).catch((err) => {
-      res.status(err.code).send(err.error);
-    });
+    if (user.role !== 'super') {
+      res.status(401).send('Unauthorized.')
+    } else {
+      next();
+    }
   }
 
   /**
@@ -28,17 +24,13 @@ export default class Authorization {
    * @param {*} next 
    */
   static isAdmin(req, res, next) {
-    const token = req.body.token || req.query.token || req.headers['x-access-token'];
+    const user = req.user;
 
-    Authorization.decode(token).then((user) => {
-      if (user.role !== 'super' && user.role !== 'admin') {
-        res.status(401).send('Unauthorized.')
-      } else {
-        next();
-      }
-    }).catch((err) => {
-      res.status(err.code).send(err.error);
-    });
+    if (user.role !== 'super' && user.role !== 'admin') {
+      res.status(401).send('Unauthorized.')
+    } else {
+      next();
+    }
   }
 
   /**
@@ -48,36 +40,12 @@ export default class Authorization {
    * @param {*} next 
    */
   static isEmployee(req, res, next) {
-    const token = req.body.token || req.query.token || req.headers['x-access-token'];
+    const user = req.user;
 
-    Authorization.decode(token).then((user) => {
-      if (user.role !== 'super' && user.role !== 'admin' && user.role !== 'employee') {
-        res.status(401).send('Unauthorized.')
-      } else {
-        next();
-      }
-    }).catch((err) => {
-      res.status(err.code).send(err.error);
-    });
-  }
-
-  /**
-   * decode token
-   * @param {*} token 
-   */
-  static decode(token) {
-    new Promise((resolve, reject) => {
-      jwt.verify(token, config.db, (err, decoded) => {
-        if (err) {
-          reject({ code: 500, error: err });
-        } else {
-          if (!decoded) {
-            reject({ code: 401, error: 'Invalid token.' });
-          } else {
-            resolve(decoded);
-          }
-        }
-      });
-    });
+    if (user.role !== 'super' && user.role !== 'admin' && user.role !== 'employee') {
+      res.status(401).send('Unauthorized.')
+    } else {
+      next();
+    }
   }
 }

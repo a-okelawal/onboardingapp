@@ -1,5 +1,6 @@
 import AuthenticationCtrl from '../controllers/AuthenticationCtrl';
 import Authentication from '../middleware/Authentication';
+import Authorization from '../middleware/Authorization';
 
 export default class AuthRoutes {
   /**
@@ -10,6 +11,8 @@ export default class AuthRoutes {
     router.route('/auth/signup')
       .post(
         Authentication.signupValidator,
+        Authentication.authenticate,
+        Authorization.isAdmin,
         AuthenticationCtrl.signup
       );
 

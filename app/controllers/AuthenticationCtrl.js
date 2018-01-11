@@ -15,13 +15,13 @@ export default class AuthenticationCtrl {
 
     AuthenticationCtrl.findUser(body).then((user) => {
       if (!user) {
-        res.status(404).send({ message: 'User with email does not exist.' });
+        res.status(404).send({ error: 'User with email does not exist.' });
       } else {
         if (AuthenticationCtrl.comparePasswords(body.password, user.password)) {
           const jwt = AuthenticationCtrl.generateToken(user);
           res.status(200).send({user, jwt});
         } else {
-          res.status(401).send({ message: 'Invalid password.' });
+          res.status(401).send({ error: 'Invalid password.' });
         }
       }
     }).catch((err) => {
