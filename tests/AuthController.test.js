@@ -167,8 +167,8 @@ describe('Authentication', () => {
             password: 'tola'
           })
           .end((err, res) => {
-            res.status.should.equal(404);
-            res.body.message.should.equal('Password is incorrect.');
+            res.status.should.equal(401);
+            res.body.message.should.equal('Invalid password.');
             done();
           });
       });
