@@ -22,6 +22,7 @@
     "body-parser": "latest",
     "dotenv": "latest",
     "express": "latest",
+    "jsonwebtoken": "^8.1.0",
     "mocha": "latest",
     "mongoose": "latest",
     "should": "latest",
