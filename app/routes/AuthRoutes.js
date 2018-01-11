@@ -12,5 +12,10 @@ export default class AuthRoutes {
         AuthValidator.signupValidator,
         AuthController.signup
       );
+
+    router.route('/auth/login')
+      .post(
+        AuthController.login
+      );
   }
 };

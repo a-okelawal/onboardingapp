@@ -143,4 +143,51 @@ describe('Authentication', () => {
       });
     });
   });
+
+  describe('login', () => {
+    describe('doesn\'t allow', () => {
+      it('login with wrong email address', (done) => {
+        request
+          .post('/api/v1/auth/login')
+          .send({
+            password: 'tola'
+          })
+          .end((err, res) => {
+            res.status.should.equal(404);
+            res.body.message.should.equal('User with email does not exist.');
+            done();
+          });
+      });
+
+      it('login with wrong password address', (done) => {
+        request
+          .post('/api/v1/auth/login')
+          .send({
+            email: 'test@email.com',
+            password: 'tola'
+          })
+          .end((err, res) => {
+            res.status.should.equal(401);
+            res.body.message.should.equal('Invalid password.');
+            done();
+          });
+      });
+    });
+
+    describe('allows', () => {
+      it('login with proper credentials', (done) => {
+        request
+          .post('/api/v1/auth/login')
+          .send({
+            email: 'test@email.com',
+            password: 'password'
+          })
+          .end((err, res) => {
+            res.status.should.equal(200);
+            res.body.should.have.property('jwt');
+            done();
+          });
+      });
+    });
+  });
 });
