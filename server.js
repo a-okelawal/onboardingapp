@@ -15,11 +15,13 @@ mongoose.connect(config.db);
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
+app.use(express.static(__dirname + '/public'));
+
 app.use('/api/v1', router);
 Routes.routes(router);
 
-app.use('/', (req, res) => {
-  res.status(200).send('You have reached the route.');
+app.use('*', (req, res) => {
+  res.sendfile('./public/views/index.html');
 });
 
 const server = app.listen(port, (err) => {
