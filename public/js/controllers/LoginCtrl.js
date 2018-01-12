@@ -1,12 +1,13 @@
 angular.module('LoginCtrl', []).controller('LoginController', ['$scope', '$cookies', '$location', 'LoginService',
-  function($scope, $cookies, $location, LoginService) {
+  'CookieService',
+  function($scope, $cookies, $location, LoginService, CookieService) {
   $scope.loading = false;
   $scope.error = false;
 
   /**
    * Go to home screen if user is already logged in.
    */
-  if ($cookies.get('token')) {
+  if (CookieService.isUserLoggedIn()) {
     $location.path('/home');
   }
 
@@ -20,8 +21,8 @@ angular.module('LoginCtrl', []).controller('LoginController', ['$scope', '$cooki
     LoginService.login({ email: $scope.email, password: $scope.password})
       .then((result) => {
         // Save token and user detail in cookies
-        $cookies.put('token', result.data.jwt);
-        $cookies.put('user', result.data.user);
+        CookieService.setToken(result.data.jwt);
+        CookieService.setUser(result.data.user);
         
         // redirect to home
         $location.path('/home');

@@ -17,13 +17,18 @@
     <script src="libs/bootstrap/dist/js/bootstrap.min.js"></script>
 
     <!-- Angular -->
+    <script src="js/controllers/BaseCtrl.js"></script>
     <script src="js/controllers/HomeCtrl.js"></script>
     <script src="js/controllers/LoginCtrl.js"></script>
+    <script src="js/services/CookieSrv.js"></script>
     <script src="js/services/LoginSrv.js"></script>
     <script src="js/appRoutes.js"></script>
     <script src="js/app.js"></script>
   </head>
-  <body ng-app="employapp">
+  <body ng-app="employapp" ng-controller="BaseController">
+    <div class="logout clickable" ng-click="logout()">
+      <h4>Log out <i class="fa fa-sign-out"></i></h4>
+    </div>
     <div ng-view></div>
   </body>
 </html>
