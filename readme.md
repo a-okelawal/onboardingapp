@@ -1,5 +1,5 @@
-*Employee App*
+#Employee App#
 
-** An app to help manage employee tasks **
+## An app to help manage employee tasks ##
 
-*** Please Remember to create your .env file using the .env.example ***
+### Note: Please Remember to create your .env file using the .env.example ###
