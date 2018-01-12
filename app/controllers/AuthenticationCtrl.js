@@ -19,7 +19,12 @@ export default class AuthenticationCtrl {
       } else {
         if (AuthenticationCtrl.comparePasswords(body.password, user.password)) {
           const jwt = AuthenticationCtrl.generateToken(user);
-          res.status(200).send({user, jwt});
+          const details = {
+            id: user._id,
+            name: user.name,
+            email: user.email
+          };
+          res.status(200).send({user: details, jwt});
         } else {
           res.status(401).send({ error: 'Invalid password.' });
         }

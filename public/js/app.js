@@ -1,0 +1,1 @@
+angular.module('employapp', ['ngRoute', 'ngCookies', 'appRoutes', 'HomeCtrl', 'LoginCtrl', 'LoginSrv']);

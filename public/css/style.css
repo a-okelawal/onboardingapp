@@ -1,0 +1,29 @@
+/* Class Styling */
+/* buttons */
+.btn-full {
+  width: 100%;
+}
+
+.error {
+  color: red;
+}
+
+.log-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 15%;
+  padding: 20px;
+}
+
+.log-inner {
+  border: 1px solid grey;
+  display: inline-block;
+  padding: 30px 50px;
+
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+}
+
+.row {
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+}
