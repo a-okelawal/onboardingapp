@@ -1,4 +1,5 @@
 import AuthRoutes from './AuthRoutes';
+import DepartmentRoutes from './DepartmentRoutes';
 
 export default class Routes {
   /**
@@ -7,5 +8,6 @@ export default class Routes {
    */
   static routes(router) {
     AuthRoutes.routes(router);
+    DepartmentRoutes.routes(router);
   }
 };
