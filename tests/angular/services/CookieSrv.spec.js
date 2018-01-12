@@ -13,12 +13,14 @@ describe('CookieService', function() {
     mockBackend = _$httpBackend_;
   }))
 
-  it('should handle setting Token and isUserLoggedIn', function() {
+  it('should handle setting Token, getToken and isUserLoggedIn', function() {
     expect(cookieService.isUserLoggedIn()).toBe(false);
+    expect(cookieService.getToken()).toBeUndefined();
     
     cookieService.setToken('test token');
 
     expect(cookieService.isUserLoggedIn()).toBe(true);
+    expect(cookieService.getToken()).toBe('test token');
   });
 
   it('should setting user and getting user', function() {

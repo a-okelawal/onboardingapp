@@ -4,6 +4,9 @@ angular.module('CookieSrv', ['ngCookies']).factory('CookieService', ['$cookies',
       $cookies.remove('user');
       $cookies.remove('token');
     },
+    getToken: function() {
+      return $cookies.get('token');
+    },
     getUser: function() {
       return $cookies.getObject('user');
     },
