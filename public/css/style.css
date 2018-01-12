@@ -4,6 +4,12 @@
   width: 100%;
 }
 
+.btn-home {
+  position: absolute;
+  left: 15px;
+  top: 10px;
+}
+
 .center-container {
   display: flex;
   justify-content: center;
