@@ -11,6 +11,7 @@
     "angular": "latest",
     "angular-route": "latest",
     "bootstrap": "latest",
-    "font-awesome": "latest"
+    "font-awesome": "latest",
+    "angular-cookies": "^1.6.8"
   }
 }
