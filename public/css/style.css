@@ -30,6 +30,7 @@
 .link-box {
   border: 1px solid grey;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+  color: black;
   display: inline-block;
   max-width: 200px;
   min-width: 200px;

@@ -22,9 +22,11 @@ describe('Base Controller', function() {
 
   it('should handle logout', function() {
     expect(cookieService.isUserLoggedIn()).toBe(true);
+    expect(scope.isLoggedIn()).toBe(true);
 
     scope.logout();
 
     expect(cookieService.isUserLoggedIn()).toBe(false);
+    expect(scope.isLoggedIn()).toBe(false);
   });
 });
