@@ -5,8 +5,11 @@ angular.module('appRoutes', []).config(['$locationProvider', '$routeProvider', f
       controller: 'LoginController'
     })
     .when('/home', {
-      templateUrl: 'views/home.html',
-      controller: 'HomeController'
+      templateUrl: 'views/home.html'
+    })
+    .when('/employee/add', {
+      templateUrl: 'views/addEmployee.html',
+      controller: 'EmployeeController'
     })
     .otherwise({
       templateUrl: 'views/login.html',

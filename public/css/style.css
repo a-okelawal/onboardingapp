@@ -4,8 +4,10 @@
   width: 100%;
 }
 
-.error {
-  color: red;
+.btn-home {
+  position: absolute;
+  left: 15px;
+  top: 10px;
 }
 
 .center-container {
@@ -27,9 +29,22 @@
   cursor: pointer;
 }
 
+.employee-container {
+  display: flex;
+  flex-flow: row;
+  justify-content: center;
+  margin-top: 5%;
+  padding: 20px;
+}
+
+.error {
+  color: red;
+}
+
 .link-box {
   border: 1px solid grey;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+  color: black;
   display: inline-block;
   max-width: 200px;
   min-width: 200px;
@@ -51,7 +66,15 @@
   right: 20px;
 }
 
+.md-width {
+  width: 50%;
+}
+
 .row {
   margin-left: 0 !important;
   margin-right: 0 !important;
+}
+
+.success {
+  color: lightgreen;
 }
