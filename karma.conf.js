@@ -29,7 +29,8 @@ module.exports = function(config) {
       './public/js/app.js',
       './tests/angular/controllers/LoginCtrl.spec.js',
       './tests/angular/controllers/BaseCtrl.spec.js',
-      './tests/angular/services/CookieSrv.spec.js'
+      './tests/angular/services/CookieSrv.spec.js',
+      './tests/angular/services/LoginSrv.spec.js'
     ],
 
 
