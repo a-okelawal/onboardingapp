@@ -13,16 +13,6 @@ describe('CookieService', function() {
     mockBackend = _$httpBackend_;
   }))
 
-  it('should handle clearing tokens', function() {
-    expect(cookieService.isUserLoggedIn()).toBe(true);
-    expect(cookieService.getUser()).toBeDefined();
-
-    cookieService.clearAll();
-
-    expect(cookieService.isUserLoggedIn()).toBe(false);
-    expect(cookieService.getUser()).toBeUndefined();
-  });
-
   it('should handle setting Token and isUserLoggedIn', function() {
     expect(cookieService.isUserLoggedIn()).toBe(false);
     
@@ -44,5 +34,15 @@ describe('CookieService', function() {
     expect(user).toBeDefined();
     expect(user.name).toBe('Abisoye Oke-lawal');
     expect(user.email).toBe('test@email.com');
+  });
+
+  it('should handle clearing tokens', function() {
+    expect(cookieService.isUserLoggedIn()).toBe(true);
+    expect(cookieService.getUser()).toBeDefined();
+
+    cookieService.clearAll();
+
+    expect(cookieService.isUserLoggedIn()).toBe(false);
+    expect(cookieService.getUser()).toBeUndefined();
   });
 });
