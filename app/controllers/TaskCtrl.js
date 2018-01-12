@@ -7,8 +7,6 @@ export default class TaskController {
   static create(req, res) {
     const body = req.body;
 
-    console.log('Inside Create');
-
     Task.create({
       administrator: body.administrator,
       assignee: body.assignee,
@@ -20,6 +18,29 @@ export default class TaskController {
         res.status(500).send({ error: err });
       } else {
         res.status(201).send({ message: 'Task created successfully.' });
+      }
+    });
+  }
+
+  static read(req, res) {
+    let query = {};
+
+    const page = req.body.page || req.query.page || 0;
+    const limit = req.body.limit || req.query.limit || 10;
+    const status = req.body.status || req.query.status;
+
+    if (status) {
+      query['status'] = status;
+    }
+
+    Task.find(query)
+    .limit(limit)
+    .skip(limit * page)
+    .exec((err, tasks) => {
+      if (err) {
+        res.status(500).send({ error: err });
+      } else {
+        res.status(200).send(tasks);
       }
     });
   }

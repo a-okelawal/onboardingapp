@@ -11,6 +11,11 @@ export default class TaskRoutes {
         Authorization.isAdmin,
         TaskValidator.createValidator,
         TaskController.create
+      )
+      .get(
+        Authentication.authenticate,
+        Authorization.isAdmin,
+        TaskController.read
       );
   }
 }

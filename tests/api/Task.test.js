@@ -91,4 +91,17 @@ describe('Task', () => {
       });
     });
   });
+
+  describe('get', () => {
+    it('should get all tasks', (done) => {
+      request
+        .get('/api/v1/tasks')
+        .set('x-access-token', stoken)
+        .end((err, res) => {
+          res.status.should.equal(200);
+          res.body.length.should.equal(1);
+          done();
+        });
+    });
+  });
 });

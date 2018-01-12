@@ -30,6 +30,10 @@ mongoose.connection.once('connected', () => {
     mongoose.connection.db.dropCollection('departments', (err) => {
       console.log('Dropped Departments');
     });
+
+    mongoose.connection.db.dropCollection('tasks', (err) => {
+      console.log('Dropped Tasks');
+    });
   }
 
   const salt = bcrypt.genSaltSync(10);
