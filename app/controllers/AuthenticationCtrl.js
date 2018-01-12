@@ -22,7 +22,8 @@ export default class AuthenticationCtrl {
           const details = {
             id: user._id,
             name: user.name,
-            email: user.email
+            email: user.email,
+            recentHire: user.recentHire
           };
           res.status(200).send({user: details, jwt});
         } else {
@@ -46,11 +47,14 @@ export default class AuthenticationCtrl {
       name: body.name,
       email: body.email,
       password: AuthenticationCtrl.hashPassword(body.password),
-      phone: body.phone
+      phone: body.phone,
+      department: body.department,
+      recentHire: body.recentHire
     });
 
     AuthenticationCtrl.createUser(user).then((result) => {
       res.status(201).send({ message: `${result.name} was created successfully as a/an ${result.role}.` });
+      //TODO: Send Email to employee with details
     }).catch((err) => {
       res.status(err.code).send({ error: err.error});
     });

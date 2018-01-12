@@ -33,6 +33,10 @@ const userSchema = new mongoose.Schema({
     type: String,
     enum: ['super', 'admin', 'employee'],
     default: 'employee'
+  },
+  recentHire: {
+    type: Boolean,
+    default: false
   }
 });
 

@@ -4,10 +4,6 @@
   width: 100%;
 }
 
-.error {
-  color: red;
-}
-
 .center-container {
   display: flex;
   justify-content: center;
@@ -25,6 +21,18 @@
 
 .clickable {
   cursor: pointer;
+}
+
+.employee-container {
+  display: flex;
+  flex-flow: row;
+  justify-content: center;
+  margin-top: 5%;
+  padding: 20px;
+}
+
+.error {
+  color: red;
 }
 
 .link-box {
@@ -52,7 +60,15 @@
   right: 20px;
 }
 
+.md-width {
+  width: 50%;
+}
+
 .row {
   margin-left: 0 !important;
   margin-right: 0 !important;
+}
+
+.success {
+  color: lightgreen;
 }

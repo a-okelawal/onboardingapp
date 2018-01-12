@@ -1,0 +1,47 @@
+<div class="employee-container">
+  <div class="row md-width">
+    <div class="col-md-10 col-xs-12">
+      <h3 class="text-center">Add a new/old employee to the list of employees</h3>
+      <form role="form" ng-submit="addEmployee(data)">
+        <div class="form-group">
+          <label for="firstname">First Name:</label>
+          <input id="firstname" name="firstname" class="form-control" type="text" minlength="3" ng-model="data.firstName"
+            placeholder="Emplyee's first name" required/>
+        </div>
+        <div class="form-group">
+          <label for="lastname">Last Name:</label>
+          <input id="lastname" name="lastname" class="form-control" type="text" minlength="3" ng-model="data.lastName" 
+            placeholder="Employee's last name" required/>
+        </div>
+        <div class="form-group">
+          <label for="email">Email:</label>
+          <input id="email" name="email" class="form-control" type="email" ng-model="data.email" 
+            placeholder="Employee's email" required/>
+        </div>
+        <div class="form-group">
+          <label for="password">Password:</label>
+          <input id="password" name="password" class="form-control" type="password" ng-model="data.password" required/>
+        </div>
+        <div class="form-group">
+          <label for="phone">Phone:</label>
+          <input id="phone" name="phone" class="form-control" type="text" minlength="11" maxlength="11" ng-model="data.phone" 
+            placeholder="e.g. 08021345678" required/>
+        </div>
+        <div class="form-group">
+          <label for="department">Department:</label>
+          <select id="department" name="department" class="form-control" ng-model="data.department" ng-options="option.name as option.name for option in departments" required>
+            <option value="">Select a department</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <div class="checkbox">
+            <label><input type="checkbox" ng-model="data.recentHire"> Employee is a new hire. </label>
+          </div>
+        </div>
+        <h5 class="text-center error" ng-if="showError()">{{err}} <i class="fa fa-exclamation-circle"></i></h5>
+        <h5 class="text-center success" ng-if="showSuccess()">{{suc}} <i class="fa fa-check"></i></h5>
+        <button class="btn btn-primary btn-full" type="submit">Add New Employee <i ng-if="showLoading()" class="fa fa-circle-o-notch fa-spin"></i></button>
+      </form>
+    </div>
+  </div>
+</div>

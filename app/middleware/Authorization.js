@@ -11,7 +11,7 @@ export default class Authorization {
     const user = req.user;
 
     if (user.role !== 'super') {
-      res.status(401).send('Unauthorized.')
+      res.status(401).send({ error: 'Unauthorized.' })
     } else {
       next();
     }
@@ -27,7 +27,7 @@ export default class Authorization {
     const user = req.user;
 
     if (user.role !== 'super' && user.role !== 'admin') {
-      res.status(401).send('Unauthorized.')
+      res.status(401).send({ error: 'Unauthorized.' })
     } else {
       next();
     }
@@ -43,7 +43,7 @@ export default class Authorization {
     const user = req.user;
 
     if (user.role !== 'super' && user.role !== 'admin' && user.role !== 'employee') {
-      res.status(401).send('Unauthorized.')
+      res.status(401).send({error: 'Unauthorized.'})
     } else {
       next();
     }
