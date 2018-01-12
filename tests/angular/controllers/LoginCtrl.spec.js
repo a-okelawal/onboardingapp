@@ -43,16 +43,32 @@ describe('Login Controller', function() {
   });
 
   it('should handle errors from login', function() {
-    spyOn(LoginService, 'login').and.returnValue(new Promise(function(resolve, reject) {
-      reject( {data: { error: 'An Error' } });
-    }));
+    mockBackend.expectPOST('/api/v1/auth/login').respond(401, {error: 'An Error'});
+
+    mockBackend.expectGET('views/login.html').respond('');
 
     expect(scope.err).toBe(undefined);
     expect(scope.showError()).toBe(false);
     
     scope.login();
+    mockBackend.flush();
 
     expect(scope.err).toBe('An Error');
     expect(scope.showError()).toBe(true);
+  });
+
+  it('should handle successful login', function() {
+    mockBackend.expectPOST('/api/v1/auth/login').respond(201, { 
+      jwt: 'kjdbkjbdkjbd',
+      user: { name: 'Test Name'}
+    });
+
+    mockBackend.expectGET('views/login.html').respond('');
+    mockBackend.expectGET('views/home.html').respond('');
+      
+    scope.login();
+    mockBackend.flush();
+    
+    expect(cookies.get('token')).toBe('kjdbkjbdkjbd');
   });
 });
