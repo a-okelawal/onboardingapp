@@ -1,8 +1,8 @@
 <div class="row">
   <div class="center-container">
-    <div class="center-inner">
+    <div class="center-inner" ng-if="formPage === 'login'">
         <h3 class="text-center">Employee Login</h3>
-        <form role="form" name="loginform" ng-submit="login()">
+        <form role="form" name="loginform" ng-submit="login(email, password)">
           <div class="form-group">
             <label> Login:
               <input class="form-control" type="email" id="email" name="email" ng-model="email" required/>
@@ -15,7 +15,31 @@
           </div>
           <h5 class="text-center error" ng-if="showError()">{{err}}</h5>
           <button type="submit" class="btn btn-primary btn-full">Login <i ng-if="showLoading()" class="fa fa-circle-o-notch fa-spin"></i></button>
+          <small class="clickable" ng-click="toggleForm('forgot-password')">Forgot Password? Click here</small>
         </form>
     </div>
+    <div class="center-inner" ng-if="formPage === 'forgot-password'">
+      <h4 class="text-center">Employee Forgot Password</h4>
+      <form role="form" name="forgotform" ng-submit="changePassword(email, secret, password)">
+        <div class="form-group">
+          <label> Email:
+              <input class="form-control" type="email" id="forgotemail" name="forgotemail" ng-model="email" required/>
+          </label>
+        </div>
+        <div class="form-group">
+          <label> Secret:
+            <input class="form-control" type="password" id="forgotsecret" name="forgotsecret" ng-model="secret" required/>
+          </label>
+        </div>
+        <div class="form-group">
+          <label> Password:
+            <input class="form-control" type="password" id="forgotpassword" name="forgotpassword" ng-model="password" required/>
+          </label>
+        </div>
+        <h5 class="text-center error" ng-if="showError()">{{err}}</h5>
+        <button type="submit" class="btn btn-primary btn-full">Change Password <i ng-if="showLoading()" class="fa fa-circle-o-notch fa-spin"></i></button>
+        <small class="clickable" ng-click="toggleForm('login')">Return to login</small>
+      </form>
+  </div>
   </div>
 </div>

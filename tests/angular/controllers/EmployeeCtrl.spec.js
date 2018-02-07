@@ -27,7 +27,7 @@ describe('EmployeeController', function() {
 
   describe('should handle AddEmployee', function() {
     it('should handle errors', function() {
-      mockBackend.expectPOST('/api/v1/auth/signup').respond(409, {error: 'User with email already exists.'});
+      mockBackend.expectPOST('http://localhost:3001/api/v1/auth/signup').respond(409, {error: 'User with email already exists.'});
       mockBackend.expectGET('views/login.html').respond('');
       
       scope.addEmployee(Object({
@@ -39,7 +39,7 @@ describe('EmployeeController', function() {
     });
 
     it('should handle success', function() {
-      mockBackend.expectPOST('/api/v1/auth/signup').respond(201, {message: 'test user was created successfully.'});
+      mockBackend.expectPOST('http://localhost:3001/api/v1/auth/signup').respond(201, {message: 'test user was created successfully.'});
       mockBackend.expectGET('views/login.html').respond('');
       
       scope.addEmployee(Object({
@@ -52,7 +52,7 @@ describe('EmployeeController', function() {
 
 
     it('should handle reseting form data', function() {
-      mockBackend.expectPOST('/api/v1/auth/signup').respond(201, {message: 'test user was created successfully.'});
+      mockBackend.expectPOST('http://localhost:3001/api/v1/auth/signup').respond(201, {message: 'test user was created successfully.'});
       mockBackend.expectGET('views/login.html').respond('');
 
       scope.data = Object({

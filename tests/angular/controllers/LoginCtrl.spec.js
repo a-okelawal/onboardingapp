@@ -26,6 +26,7 @@ describe('Login Controller', function() {
   it('should have default values', function() {
     expect(scope.loading).toBe(false);
     expect(scope.error).toBe(false);
+    expect(scope.formPage).toBe('login');
   });
 
   it('should handle displaying loading', function() {
@@ -45,7 +46,7 @@ describe('Login Controller', function() {
   });
 
   it('should handle errors from login', function() {
-    mockBackend.expectPOST('/api/v1/auth/login').respond(401, {error: 'An Error'});
+    mockBackend.expectPOST('http://localhost:3001/api/v1/auth/login').respond(401, {error: 'An Error'});
 
     mockBackend.expectGET('views/login.html').respond('');
 
@@ -60,7 +61,7 @@ describe('Login Controller', function() {
   });
 
   it('should handle successful login', function() {
-    mockBackend.expectPOST('/api/v1/auth/login').respond(201, { 
+    mockBackend.expectPOST('http://localhost:3001/api/v1/auth/login').respond(201, { 
       jwt: 'kjdbkjbdkjbd',
       user: { name: 'Test Name'}
     });
@@ -72,5 +73,48 @@ describe('Login Controller', function() {
     mockBackend.flush();
     
     expect(cookies.get('token')).toBe('kjdbkjbdkjbd');
+  });
+  
+  it('should toggle the forgot password variable', function() {
+    expect(scope.formPage).toBe('login');
+    scope.loading = true;
+    scope.error = true;
+
+    scope.toggleForm('forgot-password');
+
+    expect(scope.formPage).toBe('forgot-password');
+    expect(scope.error).toBe(false);
+    expect(scope.loading).toBe(false);
+  });
+
+  describe('Forgot Password', function() {
+    it('should handle forgot password logic on failure', function() {
+      scope.toggleForm('forgot-password');
+      mockBackend.expectPOST('http://localhost:3001/api/v1/auth/forgot-password').respond(400, {
+        error: 'Password Invalid.'
+      });
+      mockBackend.expectGET('views/home.html').respond('');
+  
+      scope.changePassword('test@email.com', 'ibadan', 'gori');
+  
+      mockBackend.flush();
+      expect(scope.error).toBe(true);
+      expect(scope.err).toBe('Password Invalid.');
+      expect(scope.formPage).toBe('forgot-password');
+    });
+  
+    it('should handle forgot password logic on success', function() {
+      scope.toggleForm('forgot-password');
+      mockBackend.expectPOST('http://localhost:3001/api/v1/auth/forgot-password').respond(200, {
+        message: 'Password change successful.'
+      });
+      mockBackend.expectGET('views/home.html').respond('');
+  
+      scope.changePassword('test@email.com', 'ibadan', 'gorilla');
+  
+      mockBackend.flush();
+      expect(scope.error).toBe(false);
+      expect(scope.formPage).toBe('login');
+    });
   });
 });
