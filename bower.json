@@ -12,6 +12,11 @@
     "angular-route": "latest",
     "bootstrap": "latest",
     "font-awesome": "latest",
-    "angular-cookies": "^1.6.8"
+    "angular-cookies": "^1.6.8",
+    "angular-animate": "^1.6.9",
+    "angular-sanitize": "^1.6.9"
+  },
+  "resolutions": {
+    "angular": "1.6.9"
   }
 }

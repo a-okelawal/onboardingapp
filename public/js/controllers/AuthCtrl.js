@@ -12,6 +12,10 @@ angular.module('AuthCtrl', []).controller('AuthController', ['$scope', '$cookies
     $location.path('/home');
   }
 
+  /**
+   * Set status of loading and error
+   * @param {*} status 
+   */
   function setStatus(status) {
     if (status === 'loading') {
       $scope.loading = true;
