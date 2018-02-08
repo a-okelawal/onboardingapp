@@ -21,6 +21,7 @@ describe('Base Controller', function() {
   }));
 
   it('should handle logout', function() {
+    cookieService.setToken('test token');
     expect(cookieService.isUserLoggedIn()).toBe(true);
     expect(scope.isLoggedIn()).toBe(true);
 

@@ -14,6 +14,7 @@ describe('CookieService', function() {
   }))
 
   it('should handle setting Token, getToken and isUserLoggedIn', function() {
+    cookieService.clearAll();
     expect(cookieService.isUserLoggedIn()).toBe(false);
     expect(cookieService.getToken()).toBeUndefined();
     
@@ -24,6 +25,7 @@ describe('CookieService', function() {
   });
 
   it('should setting user and getting user', function() {
+    cookieService.clearAll();
     expect(cookieService.getUser()).toBeUndefined();
     
     cookieService.setUser(Object({
@@ -39,6 +41,7 @@ describe('CookieService', function() {
   });
 
   it('should handle clearing tokens', function() {
+    cookieService.setToken('test token');
     expect(cookieService.isUserLoggedIn()).toBe(true);
     expect(cookieService.getUser()).toBeDefined();
 

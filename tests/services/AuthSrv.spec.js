@@ -1,14 +1,14 @@
-describe('LoginService', function() {
-  var mockBackend, loginService;
+describe('AuthService', function() {
+  var mockBackend, authService;
 
-  beforeEach(module('LoginSrv'));
+  beforeEach(module('AuthSrv'));
 
   beforeEach(inject(function(
-    _LoginService_,
+    _AuthService_,
     _$httpBackend_
   ) {
     mockBackend = _$httpBackend_;
-    loginService = _LoginService_;
+    authService = _AuthService_;
   }));
 
   it('should make a request to the backend to login', function() {
@@ -21,7 +21,7 @@ describe('LoginService', function() {
       }
     }));
 
-    loginService.login().then(function(data) {
+    authService.login().then(function(data) {
       expect(data.jwt).toBe('token');
       expect(data.user.id).toBe(1);
     });
@@ -34,7 +34,7 @@ describe('LoginService', function() {
       }
     }));
 
-    loginService.changePassword().then(function(data) {
+    authService.changePassword().then(function(data) {
       expect(data.message).toBe('Password change successful.');
     });
   });

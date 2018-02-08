@@ -1,23 +1,19 @@
-describe('Login Controller', function() {
+describe('Auth Controller', function() {
   beforeEach(module('employapp'));
 
   var scope, controller, cookies, mockBackend;
-  var CookieService, LoginService;
+  var authService;
 
   beforeEach(inject(function(
     _$rootScope_,
     _$controller_,
     _$cookies_,
-    _LoginService_,
-    _CookieService_,
     _$httpBackend_
   ) {
     scope = _$rootScope_.$new();
     cookies = _$cookies_;
-    CookieService = _CookieService_;
-    LoginService = _LoginService_;
     mockBackend = _$httpBackend_;
-    controller = _$controller_('LoginController', {
+    controller = _$controller_('AuthController', {
       $scope: scope,
       $cookies: cookies
     });

@@ -1,6 +1,6 @@
-angular.module('LoginCtrl', []).controller('LoginController', ['$scope', '$cookies', '$location', 'LoginService',
+angular.module('AuthCtrl', []).controller('AuthController', ['$scope', '$cookies', '$location', 'AuthService',
   'CookieService',
-  function($scope, $cookies, $location, LoginService, CookieService) {
+  function($scope, $cookies, $location, AuthService, CookieService) {
   $scope.loading = false;
   $scope.error = false;
   $scope.formPage = 'login';
@@ -32,7 +32,7 @@ angular.module('LoginCtrl', []).controller('LoginController', ['$scope', '$cooki
   $scope.changePassword = function(email, secret, password) {
     setStatus('loading');
 
-    LoginService.changePassword({
+    AuthService.changePassword({
       email,
       secret,
       password
@@ -52,7 +52,7 @@ angular.module('LoginCtrl', []).controller('LoginController', ['$scope', '$cooki
   $scope.login = (email, password) => {
     setStatus('loading');
 
-    LoginService.login({ email, password })
+    AuthService.login({ email, password })
       .then((result) => {
         // Save token and user detail in cookies
         CookieService.setToken(result.data.jwt);

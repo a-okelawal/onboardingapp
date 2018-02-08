@@ -20,21 +20,11 @@ module.exports = function(config) {
       './node_modules/angular-ui-router/release/angular-ui-router.js',
       './node_modules/angular-mocks/angular-mocks.js',
       './public/libs/angular-cookies/angular-cookies.min.js',
-      './public/js/services/CookieSrv.js',
-      './public/js/services/EmployeeSrv.js',
-      './public/js/services/LoginSrv.js',
-      './public/js/controllers/BaseCtrl.js',
-      './public/js/controllers/HomeCtrl.js',
-      './public/js/controllers/LoginCtrl.js',
-      './public/js/controllers/EmployeeCtrl.js',
+      './public/js/services/**/*.js',
+      './public/js/controllers/**/*.js',
       './public/js/appRoutes.js',
       './public/js/app.js',
-      './tests/angular/controllers/LoginCtrl.spec.js',
-      './tests/angular/controllers/EmployeeCtrl.spec.js',
-      './tests/angular/controllers/BaseCtrl.spec.js',
-      './tests/angular/services/CookieSrv.spec.js',
-      './tests/angular/services/LoginSrv.spec.js',
-      './tests/angular/services/EmployeeSrv.spec.js'
+      './tests/**/*.spec.js'
     ],
 
 

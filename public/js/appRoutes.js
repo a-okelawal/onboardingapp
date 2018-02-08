@@ -2,7 +2,7 @@ angular.module('appRoutes', []).config(['$locationProvider', '$routeProvider', f
   $routeProvider
     .when('/', {
       templateUrl: 'views/login.html',
-      controller: 'LoginController'
+      controller: 'AuthController'
     })
     .when('/home', {
       templateUrl: 'views/home.html'
@@ -13,7 +13,7 @@ angular.module('appRoutes', []).config(['$locationProvider', '$routeProvider', f
     })
     .otherwise({
       templateUrl: 'views/login.html',
-      controller: 'LoginController'
+      controller: 'AuthController'
     });
 
   $locationProvider.html5Mode(true);
