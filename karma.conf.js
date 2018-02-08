@@ -20,6 +20,7 @@ module.exports = function(config) {
       './node_modules/angular-ui-router/release/angular-ui-router.js',
       './node_modules/angular-mocks/angular-mocks.js',
       './public/libs/angular-cookies/angular-cookies.min.js',
+      './public/libs/angular-toasty/dist/angular-toasty.min.js',
       './public/js/services/**/*.js',
       './public/js/controllers/**/*.js',
       './public/js/appRoutes.js',

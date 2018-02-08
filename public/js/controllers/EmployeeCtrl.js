@@ -1,4 +1,9 @@
-angular.module('EmployeeCtrl', []).controller('EmployeeController', function($scope, EmployeeService) {
+angular.module('EmployeeCtrl', []).controller('EmployeeController', function(
+  $scope,
+  DepartmentService,
+  EmployeeService,
+  toasty
+) {
   $scope.data = {
     recentHire: false
   };
@@ -7,12 +12,19 @@ angular.module('EmployeeCtrl', []).controller('EmployeeController', function($sc
   $scope.success = false;
 
   //TODO: Make this dynamic and add the ability to add departments
-  $scope.departments = [
-    { name: 'Accounting' },
-    { name: 'H.R' },
-    { name: 'I.T' }, 
-    { name: 'Legal'}
-  ];
+  DepartmentService.read().then((result) => {
+    $scope.departments = result.data;
+  })
+  .catch((err) => {
+    toasty.error({
+      title: 'Uh oh!',
+      msg: msg,
+      position: err.data.error,
+      timeout: 3000,
+      sound: false,
+      theme: 'bootstrap'
+    });
+  });
 
   /**
    * Reset form
@@ -21,20 +33,26 @@ angular.module('EmployeeCtrl', []).controller('EmployeeController', function($sc
     $scope.data = {};
   }
 
+  function resetMessages() {
+    $scope.error = false;
+    $scope.loading = false;
+    $scope.success = false;
+  } 
+
   /**
    * Add Employee
    * @param {*} worker 
    */
   $scope.addEmployee = (worker) => {
-    $scope.loading = true;
+    resetMessages();
     worker['name'] = `${worker.firstName} ${worker.lastName}`;
     
-    EmployeeService.addEmployee(worker).then((result) => {
+    EmployeeService.create(worker).then((result) => {
       resetForm();
       $scope.loading = false;
       $scope.suc = result.data.message;
       $scope.success = true;
-    }, (err) => {
+    }).catch((err) => {
       $scope.loading = false;
       $scope.err = err.data.error;
       $scope.error = true;
