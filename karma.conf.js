@@ -29,12 +29,7 @@ module.exports = function(config) {
       './public/js/controllers/EmployeeCtrl.js',
       './public/js/appRoutes.js',
       './public/js/app.js',
-      './tests/angular/controllers/LoginCtrl.spec.js',
-      './tests/angular/controllers/EmployeeCtrl.spec.js',
-      './tests/angular/controllers/BaseCtrl.spec.js',
-      './tests/angular/services/CookieSrv.spec.js',
-      './tests/angular/services/LoginSrv.spec.js',
-      './tests/angular/services/EmployeeSrv.spec.js'
+      './tests/**/*.spec.js'
     ],
 
 
