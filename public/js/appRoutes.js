@@ -8,16 +8,20 @@ angular.module('appRoutes', []).config(['$locationProvider', '$routeProvider', f
       templateUrl: 'views/home.html',
       controller: 'HomeController'
     })
-    .when('/employee/add', {
-      templateUrl: 'views/addEmployee.html',
-      controller: 'EmployeeController'
-    })
     .when('/department/add', {
       templateUrl: 'views/addDepartment.html',
       controller: 'DepartmentController'
     })
     .when('/department/view', {
       templateUrl: 'views/viewDepartment.html'
+    })
+    .when('/employee/add', {
+      templateUrl: 'views/addEmployee.html',
+      controller: 'EmployeeController'
+    })
+    .when('/tasks/view', {
+      templateUrl: 'views/viewTasks.html',
+      controller: 'TaskListController'
     })
     .otherwise({
       templateUrl: 'views/login.html',

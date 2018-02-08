@@ -1,0 +1,43 @@
+<div class="default-container" ng-init="loadTasks()">
+  <a class="btn-home" href="/home">
+    <h4><i class="fa fa-chevron-left"></i> Go Home</h4>
+  </a>
+  <toasty></toasty>
+  <div class="row">
+    <div class="col-md-12 col-xs-12">
+      <div class="form-row">
+        <div class="form-group col-md-10 no-padding-x">
+          <input id="query" name="query" class="form-control" type="text" ng-model="query"
+            placeholder="Search by name, task or status"/>
+        </div>
+        <div class="form-group col-md-2">
+          <button class="btn btn-secondary" ng-click="loadTasks(query)" type="button"><i class="fa fa-search"></i> Search</button>
+        </div>
+      </div>
+      <table class="table table-dark table-striped">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Administrator</th>
+            <th>Assignee</th>
+            <th>Task</th>
+            <th>Status</th>
+            <th>Due Date</th>
+            <th>Creator</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="(index, task) in tasks">
+            <th>{{ index + 1 }}</th>
+            <td>{{ task.administrator.name }}</td>
+            <td>{{ task.assignee.name }}</td>
+            <td>{{ task.task }}</td>
+            <td>{{ task.status }}</td>
+            <td>{{ task.due | date: 'longDate' }}</td>
+            <td>{{ task.creator.name }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
