@@ -12,6 +12,13 @@ function(
           'x-access-token': CookieService.getToken()
         }
       });
+    },
+    read: function() {
+      return $http.get('http://localhost:3001/api/v1/dept', {
+        headers: {
+          'x-access-token': CookieService.getToken()
+        }
+      });
     }
   };
 }])

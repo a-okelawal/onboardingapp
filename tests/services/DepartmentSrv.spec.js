@@ -26,4 +26,22 @@ describe('Department Service', function() {
       expect(result.message).toBe('H.R created successfully.');
     });
   });
+
+  it('should handle requests to api to read departments', function() {
+    mockBackend.expectGET('http://localhost:3001/api/v1/dept').respond(201, [
+      Object({
+        name: 'i.t',
+        onboardingList: [
+          'One',
+          'Two',
+          'Three'
+        ]
+      })
+    ]);
+
+    departmentService.read().then(function(result) {
+      expect(result.name).toBe('i.t');
+      expect(result.onboardingList[0]).toBe('One');
+    });
+  });
 });

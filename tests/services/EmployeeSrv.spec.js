@@ -22,7 +22,7 @@ describe('EmployeeService', function() {
       message: 'abisoye oke-lawal was created successfully as a/an employee'
     }));
 
-    employeeService.addEmployee(Object({
+    employeeService.create(Object({
       name: 'Abisoye Oke-lawal',
       email: 'test@email',
       role: 'employee'

@@ -15,6 +15,17 @@ describe('EmployeeController', function() {
     controller = _$controller_('EmployeeController', {
       $scope: scope
     });
+
+    mockBackend.expectGET('http://localhost:3001/api/v1/dept').respond(201, [
+      Object({
+        name: 'i.t',
+        onboardingList: [
+          'One',
+          'Two',
+          'Three'
+        ]
+      })
+    ]);
   }));
 
   it('should have default values', function() {
