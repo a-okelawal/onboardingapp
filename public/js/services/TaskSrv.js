@@ -8,19 +8,22 @@ function(
   SharedService
 ) {
   return {
+    create: function(details) {
+      return $http.post('http://localhost:3001/api/v1/tasks', details, {
+        headers: {
+          'x-access-token': CookieService.getToken()
+        }
+      });
+    },
     read: function(query) {
       var url = 'http://localhost:3001/api/v1/tasks';
 
-      console.log(SharedService.isDefined(query));
-
       if (SharedService.isDefined(query.query)) {
-        url = url + '?';
+        url = `${url}?`;
         Object.keys(query).forEach((key) => {
           url = `${url}${key}=${query[key]}`;
         });
       }
-
-      console.log(url);
 
       return $http({
         method: 'GET',

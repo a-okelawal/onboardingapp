@@ -1,0 +1,35 @@
+<div class="default-container">
+    <a class="btn-home" href="/home">
+      <h4><i class="fa fa-chevron-left"></i> Go Home</h4>
+    </a>
+    <toasty></toasty>
+    <div class="row md-width">
+      <div class="col-md-10 col-xs-12">
+        <h3 class="text-center">Add a task to the list of tasks</h3>
+        <form role="form" ng-submit="addTask(data)">
+          <div class="form-group">
+            <label for="administrator">Administrator:</label>
+            <select id="administrator" name="administrator" class="form-control" ng-model="data.administrator" ng-options="admin for admin in admins" required>
+              <option value="">Select an Administrator</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="assignee">Assignee:</label>
+            <select id="assignee" name="assignee" class="form-control" ng-model="data.assignee" ng-options="employee for employee in employees" required>
+              <option value="">Select an Employee</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="task">Task:</label>
+            <input id="task" name="task" class="form-control" type="text" ng-model="data.task" 
+              placeholder="Task" required/>
+          </div>
+          <div class="form-group">
+            <label for="password">Due Date:</label>
+            <input id="due" name="due" class="form-control" type="date" ng-model="due" required/>
+          </div>
+          <button class="btn btn-primary btn-full" type="submit">Add New Task <i ng-if="showLoading()" class="fa fa-circle-o-notch fa-spin"></i></button>
+        </form>
+      </div>
+    </div>
+  </div>

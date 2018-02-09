@@ -31,10 +31,10 @@
             placeholder="e.g. 08021345678" required/>
         </div>
         <div class="form-group">
-            <label for="secret">Secret:</label>
-            <input id="secret" name="secret" class="form-control" type="text" minlength="6" ng-model="data.secret" 
-              placeholder="e.g. excellence" required/>
-          </div>
+          <label for="secret">Secret:</label>
+          <input id="secret" name="secret" class="form-control" type="text" minlength="6" ng-model="data.secret" 
+            placeholder="e.g. excellence" required/>
+        </div>
         <div class="form-group">
           <label for="department">Department:</label>
           <select id="department" name="department" class="form-control" ng-model="data.department" ng-options="option._id as option.name for option in departments" required>

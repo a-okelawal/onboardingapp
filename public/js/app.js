@@ -1,1 +1,1 @@
-angular.module('employapp', ['ngRoute', 'ngCookies', 'appRoutes', 'angular-toasty', 'AuthCtrl', 'AuthSrv', 'BaseCtrl', 'CookieSrv', 'DepartmentCtrl', 'DepartmentSrv', 'EmployeeCtrl', 'EmployeeSrv', 'HomeCtrl', 'SharedSrv','TaskSrv', 'TaskListCtrl']);
+angular.module('employapp', ['ngRoute', 'ngCookies', 'appRoutes', 'angular-toasty', 'AuthCtrl', 'AuthSrv', 'BaseCtrl', 'CookieSrv', 'DepartmentCtrl', 'DepartmentSrv', 'EmployeeCtrl', 'EmployeeSrv', 'HomeCtrl', 'SharedSrv', 'TaskCtrl', 'TaskSrv', 'TaskListCtrl']);
