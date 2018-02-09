@@ -44,6 +44,8 @@
         <div class="form-group">
           <div class="checkbox">
             <label><input type="checkbox" ng-model="data.recentHire"> Employee is a new hire. </label>
+            <br>
+            <small><b>Note:</b> New hires are required to complete tasks a week from enrolement date.</small>
           </div>
         </div>
         <h5 class="text-center error" ng-if="showError()">{{err}} <i class="fa fa-exclamation-circle"></i></h5>
