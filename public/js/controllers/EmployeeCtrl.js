@@ -1,7 +1,7 @@
 angular.module('EmployeeCtrl', []).controller('EmployeeController', function(
   $scope,
+  AuthService,
   DepartmentService,
-  EmployeeService,
   toasty
 ) {
   $scope.data = {
@@ -47,7 +47,7 @@ angular.module('EmployeeCtrl', []).controller('EmployeeController', function(
     resetMessages();
     worker['name'] = `${worker.firstName} ${worker.lastName}`;
     
-    EmployeeService.create(worker).then((result) => {
+    AuthService.signup(worker).then((result) => {
       resetForm();
       $scope.loading = false;
       $scope.suc = result.data.message;

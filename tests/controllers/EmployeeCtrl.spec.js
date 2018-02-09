@@ -1,16 +1,14 @@
 describe('EmployeeController', function() {
-  var controller, scope, employeeService, mockBackend;
+  var controller, scope, mockBackend;
 
   beforeEach(module('employapp'));
 
   beforeEach(inject(function(
     _$rootScope_,
     _$controller_,
-    _EmployeeService_,
     _$httpBackend_
   ) {
     scope = _$rootScope_.$new();
-    employeeService = _EmployeeService_;
     mockBackend = _$httpBackend_;
     controller = _$controller_('EmployeeController', {
       $scope: scope
@@ -36,7 +34,7 @@ describe('EmployeeController', function() {
     expect(scope.success).toBe(false);
   });
 
-  describe('should handle AddEmployee', function() {
+  describe('AddEmployee', function() {
     it('should handle errors', function() {
       mockBackend.expectPOST('http://localhost:3001/api/v1/auth/signup').respond(409, {error: 'User with email already exists.'});
       mockBackend.expectGET('views/login.html').respond('');

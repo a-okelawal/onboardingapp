@@ -38,4 +38,22 @@ describe('AuthService', function() {
       expect(data.message).toBe('Password change successful.');
     });
   });
+
+  it('should handle requests to api to add an employee', function() {
+    mockBackend.expectPOST('/api/v1/auth/signup', Object({
+      name: 'Abisoye Oke-lawal',
+      email: 'test@email',
+      role: 'employee'
+    })).respond(201, Object({
+      message: 'abisoye oke-lawal was created successfully as a/an employee'
+    }));
+
+    authService.signup(Object({
+      name: 'Abisoye Oke-lawal',
+      email: 'test@email',
+      role: 'employee'
+    })).then(function(result) {
+      expect(result.message).toBe('abisoye oke-lawal was created successfully as a/an employee');
+    });
+  });
 });
