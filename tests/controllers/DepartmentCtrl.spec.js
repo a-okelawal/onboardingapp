@@ -64,6 +64,7 @@ describe('Department Controller', function() {
       message: 'Success'
     });
     mockBackend.expectGET('views/login.html').respond('');
+    mockBackend.expectGET('views/viewDepartment.html').respond('');
 
     scope.data.name = 'Test Department';
     scope.addToList('One');
@@ -73,8 +74,7 @@ describe('Department Controller', function() {
     scope.addDepartment();
     mockBackend.flush();
 
-    expect(scope.data.name).toBeUndefined();
-    expect(scope.data.onboardingList.length).toBe(0);
+    expect(location.path()).toBe('/department/view');
   });
 
   describe('should handle adding a department on failure', function() {
@@ -92,7 +92,15 @@ describe('Department Controller', function() {
       scope.addDepartment();
       mockBackend.flush();
   
-      expect(scope.data.name).toBe('Test Department');
+      expect(location.path()).toBe('/');
+    });
+
+    it ('when onboarding list is empty', function() {
+      scope.data.name = 'Test Department';
+  
+      scope.addDepartment();
+  
+      expect(location.path()).toBe('/');
     });
   });
 });

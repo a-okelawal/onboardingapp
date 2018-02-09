@@ -41,17 +41,7 @@ angular.module('DepartmentCtrl', []).controller('DepartmentController', function
     } else {
       DepartmentService.create($scope.data)
         .then((result) => {
-          $scope.data = {
-            onboardingList: []
-          };
-          toasty.success({
-            title: 'Success!',
-            msg: result.data.message,
-            position: 'toasty-position-top-right',
-            timeout: 3000,
-            sound: false,
-            theme: 'bootstrap'
-          });
+          $location.path('/department/view');
         })
         .catch((err) => {
           showError(err.data.error);

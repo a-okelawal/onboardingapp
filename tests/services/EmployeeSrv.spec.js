@@ -14,33 +14,20 @@ describe('EmployeeService', function() {
   }))
 
   it('should handle requests to api to add an employee', function() {
-    mockBackend.expectGET('/api/v1/employees').respond(200, [
-      Object({
-        name: 'Abisoye Oke-lawal',
-        email: 'test@email.com',
-        role: 'employee'
-      })
-    ]);
+    mockBackend.expectPOST('/api/v1/auth/signup', Object({
+      name: 'Abisoye Oke-lawal',
+      email: 'test@email',
+      role: 'employee'
+    })).respond(201, Object({
+      message: 'abisoye oke-lawal was created successfully as a/an employee'
+    }));
 
-    employeeService.read().then(function(result) {
-      expect(result[0].name).toBe('Abisoye Oke-lawal');
-      expect(result[0].email).toBe('test@email.com');
-    });
-  });
-
-  it('should handle requests to api to update an employee', function() {
-    mockBackend.expectGET('/api/v1/employees/0', Object({
-      role: 'admin'
-    })).respond(200, [
-      Object({
-        role: 'admin'
-      })
-    ]);
-
-    employeeService.update(Object({
-      role: 'admin'
-    }), 10).then(function(result) {
-      expect(result[0].role).toBe('admin');
+    employeeService.create(Object({
+      name: 'Abisoye Oke-lawal',
+      email: 'test@email',
+      role: 'employee'
+    })).then(function(result) {
+      expect(result.message).toBe('abisoye oke-lawal was created successfully as a/an employee');
     });
   });
 });

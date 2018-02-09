@@ -10,7 +10,7 @@ describe('Task List Controller', function() {
   ) {
     scope = _$rootScope_.$new();
     mockBackend = _$httpBackend_;
-    controller = _$controller_('TaskController', {
+    controller = _$controller_('EmployeeController', {
       $scope: scope
     });
 

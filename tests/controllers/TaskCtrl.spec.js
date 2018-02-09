@@ -26,56 +26,43 @@ describe('Task Controller', function() {
 
   describe('AddTask', function() {
     it('should handle errors', function() {
-      mockBackend.expectGET('http://localhost:3001/api/v1/employees').respond(200,  [
-        Object({
-          name: 'One'
-        })
-      ]);
       mockBackend.expectPOST('http://localhost:3001/api/v1/tasks', Object({
         administrator: 'Alice',
         assignee: 'Bode',
+        creator: 'Femi',
         task: 'Add a another task.',
-        due: "12/12/2018"
-      })).respond(400, { error: 'Server Error.' });
+        status: 'awaiting-start',
+        due: new Date('12/12/2018')
+      })).respond(500, {error: 'Server Error.'});
       mockBackend.expectGET('views/login.html').respond('');
-
-      scope.data = {
-        administrator: 'Alice',
-        assignee: 'Bode',
-        task: 'Add a another task.'
-      };
-
-      scope.due = new Date('12/12/2018');
+      
       scope.addTask(Object({
         administrator: 'Alice',
         assignee: 'Bode',
-        task: 'Add a another task.'
+        task: 'Add a another task.',
+        due: new Date('12/12/2018')
       }));
       mockBackend.flush();
 
       expect(scope.data.administrator).toBe('Alice');
       expect(scope.data.assignee).toBe('Bode');
+      expect(scope.data.task).toBe('Femi');
     });
 
     it('should handle success', function() {
-      mockBackend.expectGET('http://localhost:3001/api/v1/employees').respond(200,  [
-        Object({
-          name: 'One'
-        })
-      ]);
       mockBackend.expectPOST('http://localhost:3001/api/v1/tasks', Object({
         administrator: 'Alice',
         assignee: 'Bode',
         task: 'Add a another task.',
-        due: "12/12/2018"
+        due: new Date('12/12/2018')
       })).respond(200, {message: 'Task Created.'});
       mockBackend.expectGET('views/login.html').respond('');
       
-      scope.due = new Date('12/12/2018');
       scope.addTask(Object({
         administrator: 'Alice',
         assignee: 'Bode',
-        task: 'Add a another task.'
+        task: 'Add a another task.',
+        due: new Date('12/12/2018')
       }));
       mockBackend.flush();
 
