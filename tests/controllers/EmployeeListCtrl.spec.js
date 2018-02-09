@@ -41,4 +41,34 @@ describe('Employee List Controller', function() {
     };
     expect(scope.isSuper()).toBe(true);
   });
+
+  it('should handle changing roles on failure', function() {
+    mockBackend.expectPUT('http://localhost:3001/api/v1/employees/10', Object({
+      role: 'admin'
+    })).respond(500, Object({
+      error: 'Error'
+    }));
+
+    expect(scope.employees[0].role).toBe('employee');
+
+    scope.changeRole('admin', 0, 10);
+    mockBackend.flush();
+
+    expect(scope.employees[0].role).toBe('employee');
+  });
+
+  it('should handle changing roles on success', function() {
+    mockBackend.expectPUT('http://localhost:3001/api/v1/employees/10', Object({
+      role: 'admin'
+    })).respond(200, Object({
+      message: 'Success'
+    }));
+
+    expect(scope.employees[0].role).toBe('employee');
+
+    scope.changeRole('admin', 0, 10);
+    mockBackend.flush();
+
+    expect(scope.employees[0].role).toBe('admin');
+  });
 });
